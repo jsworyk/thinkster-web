@@ -4,13 +4,13 @@ import { Navbar } from "../../components";
 import { getPoll } from "../../api/polls.api";
 import { getPollCategoryImage } from "./poll.util";
 import { styles } from "./styles";
-import PreAnswerBar from "../../components/pre-answer-bar/PreAnswerBar";
 import PreAnswer from "./PreAnswer";
 import PostAnswer from "./PostAnswer";
 
 const Poll = (props) => {
   const { container, icon, categoryText } = styles;
   const [pollData, setPollData] = useState({});
+  const [answerSubmitted, setAnswerSubmitted] = useState(false);
   const token = localStorage.getItem("applicationToken");
   const { PollId } = props.match.params;
   useEffect(() => {
@@ -19,7 +19,7 @@ const Poll = (props) => {
         setPollData(poll);
       });
     }
-  }, [token]);
+  }, [token, answerSubmitted]);
   const history = useHistory();
   if (pollData && pollData.Question) {
     return (
@@ -36,7 +36,12 @@ const Poll = (props) => {
           {pollData.IsAnswered ? (
             <PostAnswer pollData={pollData} token={token} />
           ) : (
-            <PreAnswer pollData={pollData} />
+            <PreAnswer
+              setAnswerSubmitted={setAnswerSubmitted}
+              answerSubmitted={answerSubmitted}
+              token={token}
+              pollData={pollData}
+            />
           )}
         </div>
       </Navbar>

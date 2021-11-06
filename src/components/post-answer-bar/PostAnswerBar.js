@@ -34,12 +34,20 @@ const PostAnswerBar = ({ item, responseData, token, filterState }) => {
 
   return (
     <>
-      <div onClick={handlePressShowUsers} style={container}>
+      <div style={container}>
         <div
+          onClick={handlePressShowUsers}
           style={{
-            backgroundColor: ChartColour,
-            width: `${(SelectionCount / ResponseCount) * 100}%`,
-            padding: 12,
+            flex: 1,
+            borderRadius: 4,
+            backgroundColor: SelectionCount === 0 ? "#FFF" : ChartColour,
+            width:
+              SelectionCount === 0
+                ? "100%"
+                : `${(SelectionCount / ResponseCount) * 100}%`,
+            height: 35,
+            alignContent: "center",
+            display: "flex",
           }}
         >
           <h6 style={choiceTextStyle}>{Choice}</h6>

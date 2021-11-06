@@ -19,7 +19,8 @@ export const submitAnswer = ({
   ApplicationToken,
   PollId,
   Response,
-  ResponseVisibility,
+  ResponseVisibility = "PU",
+  FollowerQuestionId = null,
 }) => {
   return axios
     .post(`${API_URL}/submitanswer`, {
@@ -27,6 +28,7 @@ export const submitAnswer = ({
       PollId,
       Response,
       ResponseVisibility,
+      ...(FollowerQuestionId && { FollowerQuestionId }),
     })
     .then((res) => {
       console.log(res);
