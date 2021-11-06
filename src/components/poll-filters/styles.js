@@ -1,0 +1,36 @@
+export const styles = {
+  cellContainer: {
+    backgroundColor: "#2962FF",
+    margin: 6,
+    paddingLeft: 12,
+    paddingRight: 12,
+    height: 30,
+    justifyContent: "center",
+    display: "flex",
+    borderRadius: 4,
+  },
+  unSelectedCellContainer: {
+    margin: 6,
+    paddingLeft: 12,
+    paddingRight: 12,
+    height: 30,
+    justifyContent: "center",
+    display: "flex",
+    borderRadius: 4,
+  },
+  cellLabel: {
+    margin: 0,
+    textAlign: "center",
+    alignSelf: "center",
+    color: "#FFF",
+    fontSize: 12,
+    fontWeight: "bold",
+  },
+  unselectedCellLabel: {
+    margin: 0,
+    textAlign: "center",
+    alignSelf: "center",
+    color: "#000",
+    fontSize: 12,
+  },
+};
