@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { getCurrentUserProfile } from "../../api/auth.api";
 import { useHistory } from "react-router-dom";
 import { styles } from "./styles";
-
+import malePlaceholder from "../post-answer-bar/male-placeholder.png";
 const Navbar = ({ children }) => {
   const { container, profilePhoto } = styles;
   const history = useHistory();
@@ -25,7 +25,7 @@ const Navbar = ({ children }) => {
           src={
             profile && profile.AvatarThumbnailUrl
               ? profile.AvatarThumbnailUrl
-              : null
+              : malePlaceholder
           }
         />
       </div>

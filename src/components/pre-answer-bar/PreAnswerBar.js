@@ -7,18 +7,20 @@ const PreAnswerBar = ({
   pollData,
   setAnswerSubmitted,
   answerSubmitted,
+  setLoading,
 }) => {
   const { container, choiceTextStyle } = styles;
   const { Choice, PollChoiceId } = item;
   const { PollId } = pollData;
-  console.log({ item });
   const handleSubmitAnswer = async () => {
+    setLoading(true);
     await submitAnswer({
       ApplicationToken: token,
       PollId,
       Response: PollChoiceId,
     });
     setAnswerSubmitted(!answerSubmitted);
+    setLoading(false);
   };
 
   return (

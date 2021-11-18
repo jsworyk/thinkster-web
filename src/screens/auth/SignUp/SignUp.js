@@ -2,35 +2,44 @@ import React, { useState, useEffect } from "react";
 import { Input, Button } from "../../../components";
 import { styles, fields } from "./style";
 import logo from "../../../assets/text-logo.png";
-import { getApplicationToken, login } from "../../../api/auth.api";
+import { getApplicationToken, signup, login } from "../../../api/auth.api";
 import { useHistory, withRouter } from "react-router-dom";
 import LoadingOverlay from "react-loading-overlay";
 
-const Login = () => {
+const Signup = () => {
   const history = useHistory();
-  const [loginRequest, setLoginRequest] = useState({});
+  const [signupRequest, setSignupRequest] = useState({});
   const [loading, setLoading] = useState(false);
   const { container, logoStyle, createNewAccount } = styles;
   const handleFieldChanged = (key, value) => {
     const data = value.target.value;
-    let obj = loginRequest;
+    let obj = signupRequest;
     obj[key] = data;
-    setLoginRequest({ ...loginRequest });
+    setSignupRequest({ ...signupRequest });
   };
 
-  const handleLoginAttempt = async () => {
+  const handleSignupRequest = async () => {
     setLoading(true);
     localStorage.clear();
     const applicationToken = await getApplicationToken(
       "b7b77c851cbfe5d23e3de48b5eed2c67",
       "8d113b2412c13ccf445fcd7ae6666a96"
     );
-    const request = await login(
+    const request = await signup(
       applicationToken,
-      loginRequest["Email"],
-      loginRequest["Password"]
+      signupRequest["Name"].split(" ")[0],
+      signupRequest["Name"].split(" ").length > 1
+        ? signupRequest["Name"].split(" ")[1]
+        : " ",
+      signupRequest["Email"],
+      signupRequest["Password"]
     );
-    if (request) {
+    const response = await login(
+      applicationToken,
+      signupRequest["Email"],
+      signupRequest["Password"]
+    );
+    if (response) {
       history.push("/poll/123");
       localStorage.setItem("applicationToken", applicationToken);
     }
@@ -45,7 +54,7 @@ const Login = () => {
   }, []);
 
   return (
-    <LoadingOverlay active={loading} spinner text="Logging Into Thinkster">
+    <LoadingOverlay active={loading} spinner text="Creating Account">
       <div style={container}>
         <div
           style={{
@@ -56,7 +65,7 @@ const Login = () => {
           }}
         >
           <img alt="Thinkster logo" style={logoStyle} src={logo} />
-          <h2>Sign In</h2>
+          <h2>Create Account</h2>
           {fields.map((el) => (
             <Input
               onChange={(value) => handleFieldChanged(el.field, value)}
@@ -64,14 +73,14 @@ const Login = () => {
               type={el.type}
             />
           ))}
-          <Button onClick={handleLoginAttempt} text="Enter" />
+          <Button onClick={handleSignupRequest} text="Enter" />
         </div>
-        <h2 onClick={() => history.push("/register")} style={createNewAccount}>
-          Create New Account
+        <h2 onClick={() => history.push("/")} style={createNewAccount}>
+          Back To Login
         </h2>
       </div>
     </LoadingOverlay>
   );
 };
 
-export default withRouter(Login);
+export default withRouter(Signup);

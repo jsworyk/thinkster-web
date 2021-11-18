@@ -3,7 +3,6 @@ export const API_URL = "https://api.thinkster.ca";
 export const APIV2_URL = "https://apiv21.thinkster.ca";
 
 export const login = async (ApplicationToken, Email, Password) => {
-  console.log(ApplicationToken, Email, Password);
   return axios
     .post(
       `${APIV2_URL}/api/auth/signin`,
@@ -19,7 +18,6 @@ export const login = async (ApplicationToken, Email, Password) => {
     )
     .then((response) => {
       const { data } = response;
-      console.log(data);
       return data;
     })
     .catch((err) => {
@@ -48,8 +46,8 @@ export const signup = (
   FirstName,
   LastName,
   EmailAddress,
-  GenderCode,
-  PostalCode,
+  // GenderCode,
+  // PostalCode,
   Password
 ) => {
   return axios
@@ -60,8 +58,8 @@ export const signup = (
         LastName,
         EmailAddress,
         Password,
-        PostalCode,
-        GenderCode,
+        PostalCode: "R2C1N4",
+        GenderCode: "OT",
       },
       {
         headers: {

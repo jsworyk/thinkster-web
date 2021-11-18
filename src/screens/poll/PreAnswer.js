@@ -6,6 +6,7 @@ const PreAnswer = ({
   token,
   answerSubmitted,
   setAnswerSubmitted,
+  setLoading,
 }) => {
   return (
     <>
@@ -18,6 +19,7 @@ const PreAnswer = ({
             token={token}
             item={el}
             pollData={pollData}
+            setLoading={setLoading}
           />
         ))}
     </>
