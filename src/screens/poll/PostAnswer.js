@@ -3,6 +3,7 @@ import { getResponseCountForChoices } from "../../api/polls.api";
 import PostAnswerBar from "../../components/post-answer-bar/PostAnswerBar";
 import PollFilters from "../../components/poll-filters/PollFilters";
 import { initialFilterState } from "./config";
+import PollComments from "../../components/poll-comments";
 const PostAnswer = ({ pollData, token }) => {
   const [responseData, setResponseData] = useState(null);
   const [filterState, setFilterState] = useState(initialFilterState);
@@ -66,7 +67,6 @@ const PostAnswer = ({ pollData, token }) => {
       }
       res.ResponseCount = getDenominator(ResponseDetails);
       setResponseData(res);
-      console.log({ res });
     });
   }, [filterState]);
 
@@ -87,6 +87,7 @@ const PostAnswer = ({ pollData, token }) => {
         filterState={filterState}
         setFilterState={setFilterState}
       />
+      <PollComments TargetId={responseData.PollId} TargetTypeCode="PO" />
     </div>
   );
 };
