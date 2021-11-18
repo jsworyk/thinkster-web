@@ -3,11 +3,12 @@ import { getCurrentUserProfile } from "../../api/auth.api";
 import { useHistory } from "react-router-dom";
 import { styles } from "./styles";
 import malePlaceholder from "../post-answer-bar/male-placeholder.png";
-const Navbar = ({ children }) => {
+const Navbar = ({ children, navProps }) => {
   const { container, profilePhoto } = styles;
   const history = useHistory();
   const token = localStorage.getItem("applicationToken");
   const [profile, setProfile] = useState({});
+  const { PollId } = navProps.match.params;
   useEffect(() => {
     getCurrentUserProfile(token, "").then((p) => {
       setProfile(p);
@@ -15,7 +16,12 @@ const Navbar = ({ children }) => {
   }, []);
   const handleLogout = () => {
     localStorage.clear();
-    history.push("/");
+    history.push({
+      pathname: "/",
+      state: {
+        PollId,
+      },
+    });
   };
   return (
     <div>

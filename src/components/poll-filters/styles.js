@@ -8,6 +8,7 @@ export const styles = {
     justifyContent: "center",
     display: "flex",
     borderRadius: 4,
+    cursor: "pointer",
   },
   unSelectedCellContainer: {
     margin: 6,
@@ -17,6 +18,7 @@ export const styles = {
     justifyContent: "center",
     display: "flex",
     borderRadius: 4,
+    cursor: "pointer",
   },
   cellLabel: {
     margin: 0,

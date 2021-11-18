@@ -3,14 +3,16 @@ import { Input, Button } from "../../../components";
 import { styles, fields } from "./style";
 import logo from "../../../assets/text-logo.png";
 import { getApplicationToken, login } from "../../../api/auth.api";
-import { useHistory, withRouter } from "react-router-dom";
+import { useHistory, withRouter, useLocation } from "react-router-dom";
 import LoadingOverlay from "react-loading-overlay";
 
 const Login = () => {
   const history = useHistory();
+  const location = useLocation();
   const [loginRequest, setLoginRequest] = useState({});
   const [loading, setLoading] = useState(false);
   const { container, logoStyle, createNewAccount } = styles;
+  const { PollId } = location.state;
   const handleFieldChanged = (key, value) => {
     const data = value.target.value;
     let obj = loginRequest;
@@ -31,7 +33,12 @@ const Login = () => {
       loginRequest["Password"]
     );
     if (request) {
-      history.push("/poll/123");
+      history.push({
+        pathname: `/poll/${PollId}`,
+        state: {
+          PollId,
+        },
+      });
       localStorage.setItem("applicationToken", applicationToken);
     }
     setLoading(false);
@@ -40,7 +47,12 @@ const Login = () => {
   useEffect(() => {
     const token = localStorage.getItem("applicationToken");
     if (token) {
-      history.push("/poll/123");
+      history.push({
+        pathname: `/poll/${PollId}`,
+        state: {
+          PollId,
+        },
+      });
     }
   }, []);
 
@@ -66,7 +78,17 @@ const Login = () => {
           ))}
           <Button onClick={handleLoginAttempt} text="Enter" />
         </div>
-        <h2 onClick={() => history.push("/register")} style={createNewAccount}>
+        <h2
+          onClick={() =>
+            history.push({
+              pathname: `/register`,
+              state: {
+                PollId,
+              },
+            })
+          }
+          style={createNewAccount}
+        >
           Create New Account
         </h2>
       </div>

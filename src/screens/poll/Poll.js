@@ -26,13 +26,18 @@ const Poll = (props) => {
           console.log(err);
         });
     } else {
-      history.push("/");
+      history.push({
+        pathname: "/",
+        state: {
+          PollId,
+        },
+      });
     }
   }, [token, answerSubmitted]);
   if (pollData && pollData.Question) {
     return (
       <LoadingOverlay active={loading} spinner text="Submitting Response">
-        <Navbar>
+        <Navbar navProps={props}>
           <div style={container}>
             <div style={{ display: "flex", marginBottom: 8 }}>
               <img
