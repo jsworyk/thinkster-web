@@ -32,6 +32,8 @@ const PostAnswerBar = ({ item, responseData, token, filterState }) => {
     });
   }, [filterState]);
 
+  console.log({ SelectionCount, ResponseCount });
+
   return (
     <>
       <div style={container}>
