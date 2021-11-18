@@ -12,7 +12,10 @@ const Login = () => {
   const [loginRequest, setLoginRequest] = useState({});
   const [loading, setLoading] = useState(false);
   const { container, logoStyle, createNewAccount } = styles;
-  const { PollId } = location.state;
+  let PollId = 0;
+  if (location && location.state) {
+    PollId = location.state.PollId;
+  }
   const handleFieldChanged = (key, value) => {
     const data = value.target.value;
     let obj = loginRequest;
