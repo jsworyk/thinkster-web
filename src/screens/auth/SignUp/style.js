@@ -13,6 +13,7 @@ export const styles = {
     width: 300,
     height: "100%",
     paddingBottom: 50,
+    objectFit: "contain",
   },
   createNewAccount: {
     display: "flex",

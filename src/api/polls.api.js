@@ -12,7 +12,9 @@ export const getPoll = (applicationToken, PollId) => {
     .then((response) => {
       return response.data;
     })
-    .catch((error) => {});
+    .catch((error) => {
+      window.location.replace("https://www.thinkster.info");
+    });
 };
 
 export const submitAnswer = ({

@@ -20,7 +20,9 @@ const PollComments = ({ TargetId, TargetTypeCode }) => {
       }
     });
   }, []);
-
+  if (!comments || comments.length === 0) {
+    return null;
+  }
   return (
     <div>
       <h4>Join The Discussion</h4>

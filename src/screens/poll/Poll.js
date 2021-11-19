@@ -7,6 +7,7 @@ import { styles } from "./styles";
 import PreAnswer from "./PreAnswer";
 import PostAnswer from "./PostAnswer";
 import LoadingOverlay from "react-loading-overlay";
+import AppLinks from "../../components/app-links/index";
 
 const Poll = (props) => {
   const { container, icon, categoryText } = styles;
@@ -23,7 +24,7 @@ const Poll = (props) => {
           setPollData(poll);
         })
         .catch((err) => {
-          console.log(err);
+          console.log({ err });
         });
     } else {
       history.push({
@@ -58,6 +59,7 @@ const Poll = (props) => {
                 pollData={pollData}
               />
             )}
+            <AppLinks />
           </div>
         </Navbar>
       </LoadingOverlay>

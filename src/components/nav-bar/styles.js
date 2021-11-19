@@ -1,7 +1,7 @@
 export const styles = {
   container: {
-    backgroundColor: "#2962FF",
-    justifyContent: "flex-end",
+    backgroundColor: "#FFF",
+    justifyContent: "space-between",
     display: "flex",
     padding: 12,
   },
@@ -11,5 +11,9 @@ export const styles = {
     borderRadius: 30,
     alignSelf: "center",
     display: "flex",
+  },
+  logoPhoto: {
+    maxWidth: 200,
+    objectFit: "contain",
   },
 };
